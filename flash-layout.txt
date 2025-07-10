@@ -1,0 +1,8 @@
+| Status | WiFi SSID Length | WiFi SSID   | WiFi Password Length | WiFi Password | Station ID Length | Station ID |
+|   0    |         1        |   2 - 101   |          102         |   103 - 202   |        203        |  204 - 223 |
+| Line ID Length |  Line ID  | Rotation | Station Name Length | Station Name |
+|      224       | 225 - 240 |    241   |          242        |   243 - 293  |
+
+Status:
+|    | SSID | Password | Station ID | Line ID |
+|0000|

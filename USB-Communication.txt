@@ -1,0 +1,187 @@
+1. Get Device Status
+  - Code: 0x00
+  - Input Size: 1
+  - Input:
+    | Code |
+    | 0x00 |
+  - Output Size: 1
+  - Output:
+    | Status |
+    |   1    |
+
+    - Status:
+        - 0x00: OK
+        - 0x01: Line not set
+        - 0x02: Station not set
+        - 0x04: WiFi password not set
+        - 0x08: WiFi SSID not set
+
+  
+
+2. Restart Device
+  - Code: 0x01
+  - Input Size: 1
+  - Input:
+    | Code |
+    | 0x01 |
+  - Output Size: 1
+  - Output:
+    | Status |
+    |   1    |
+
+    - Status:
+      - 0x00: Ok
+      - 0x01: Error
+
+
+3. Scan WiFi Networks v
+ - Code: 0x02
+ - Input Size: 1
+ - Input
+  | Code |
+  | 0x02 |
+ - Output Size: vary
+ - Output:
+  | Status | Network Count | Networks |
+  |   1    |        1      |   vary   |
+
+  (Network)
+  | SSID Length | SSID |
+  |     1       | vary |
+
+  - Status:
+    - 0x00: Success
+    - 0x01: Failed
+  
+  - SSID:
+    - UTF-8 Encoded
+
+
+4. Set WiFi v
+  - Code: 0x03
+  - Input Size: vary
+  - Input
+    | Code | SSID Length | SSID | Password Length | Password |
+    | 0x03 |      1      | vary |         1       |   vary   |
+  - Output Size: 1
+  - Output: 
+    | Status | WiFi Status | IP Address | 
+    |   1    |      1      |      4     |
+    - WiFi Status: wl_status_t
+    - IP Address: IPv4, only return when status is WL_CONNECTED, otherwise all zeros
+
+
+5. Get Connected WiFi SSID v
+- Code: 0x04
+- Input Size: 1
+- Input:
+  | Code |
+  | 0x04 |
+- Output Size: vary
+- Output:
+  | Status | WiFi Status | SSID Length | SSID |
+  |   1    |     1       |      1      | vary |
+
+  - WiFi status: wl_status_t
+
+6. Get saved WiFi SSID v
+- Code: 0x05
+- Input Size: 1
+- Input:
+  | Code |
+  | 0x05 |
+- Output Size: vary
+- Output:
+  | Status | SSID Length | SSID |
+  |    1   |      1      | vary |
+
+
+7. Get saved WiFi Password v
+- Code: 0x06
+- Input Size: 1
+- Input:
+  | Code |
+  | 0x06 |
+- Output Size: vary
+- Output:
+  | Status | Password Length | Password |
+  |    1   |         1       |   vary   |
+
+
+8. Get Local IPv4 Address v
+- Code: 0x07
+- Input Size: 1
+- Input:
+  | Code |
+  | 0x05 |
+- Output Size: 6
+- Output:
+  | Status | WiFi Status | IP Address |
+  |   1    |     1       |      4     |
+
+  - IP Address: if WiFi not connected, all bytes are zeros
+
+
+9. Set Station v
+  - Code: 0x08
+  - Input Size: vary
+  - Input:
+    | Code | Station ID Length | Station ID |
+    | 0x07 |          1        |    vary    |
+  - Output Size: 1
+  - Output:
+    | Status |
+    |   1    |
+
+    - Status:
+      - 0x00: Success
+      - 0x01: Failed
+
+
+10. Set Line v
+  - Code: 0x09
+  - Input Size: vary
+  - Input:
+    | Code | Line ID Length | Line ID |
+    | 0x08 |       1        |   vary  |
+  - Output:
+    | Status |
+    |   1    |
+
+    - Status:
+      - 0x00: Success
+      - 0x01: Failed
+
+
+11. Get Selected Station v
+  - Code: 0x0A
+  - Input Size: 1
+  - Input:
+    | Code |
+    | 0x09 |
+  - Output Size: vary
+  - Output:
+    | Status | Station ID Length | Station ID |
+    |   1    |         1         |    vary    |
+
+12. Get Selected Line v
+  - Code: 0x0B
+  - Input Size: 1
+  - Input:
+    | Code |
+    | 0x10 |
+  - Output Size: vary
+  - Output:
+    | Status | Line ID Length | Line ID |
+    |   1    |        1       |   vary  |
+
+13. Enter config mode
+  - Code: 0x0C
+  - Input Size: 1
+  - Input:
+    | Code |
+    | 0x0C |
+  - Output Size: 1
+  - Output:
+    | Status |
+    |    1   |
